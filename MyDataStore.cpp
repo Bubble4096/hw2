@@ -159,19 +159,19 @@ return product_hits;
 
 void MyDataStore::dump(std::ostream& ofile)
 { 
-  cout << "<products>" <<endl;
+  ofile << "<products>" <<endl;
   for(size_t i = 0; i < totalProducts_.size(); i++)
   {
     totalProducts_[i]->dump(ofile);
   }
-  cout << "</products>" <<endl;
+  ofile << "</products>" <<endl;
 
-  cout << "<users>" <<endl;
+  ofile << "<users>" <<endl;
   for(size_t i = 0; i < user_vect_.size(); i++)
   {
     user_vect_[i]->dump(ofile);
   }
-  cout << "</users>" <<endl;
+  ofile << "</users>" <<endl;
 }
 
 void MyDataStore::viewcart(string user_name)
