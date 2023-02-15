@@ -1,6 +1,7 @@
 #ifndef UTIL_H
 #define UTIL_H
 
+
 #include <string>
 #include <iostream>
 #include <set>
@@ -10,24 +11,42 @@
  *  in this header file (since they are templates).
  *  Both functions should run in time O(n*log(n)) and not O(n^2)
  */
+ // and search
 template <typename T>
 std::set<T> setIntersection(std::set<T>& s1, std::set<T>& s2)
 {
+  std::set<T> intersection; 
+  for (typename std::set<T>::iterator it = s1.begin(); it != s1.end(); it++)
+      {
+          intersection.insert(*it);
+          if(s2.find(*it) != s2.end())
+          {
+            intersection.insert(*it);
+          }
 
-
-
-
+      }
+    return intersection;
 
 }
+// or search
 template <typename T>
 std::set<T> setUnion(std::set<T>& s1, std::set<T>& s2)
 {
+  std::set<T> union667; 
+  for (typename std::set<T>::iterator it = s1.begin(); it != s1.end(); it++)
+      {
+          if(s2.find(*it) == s2.end())
+          {
+            union667.insert(*s2.find(*it));
+          }
 
+        union667.insert(*it);
 
+      }
 
+    return union667;
 
-
-}
+};
 
 /***********************************************/
 /* Prototypes of functions defined in util.cpp */

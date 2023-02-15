@@ -9,6 +9,7 @@
 #include "db_parser.h"
 #include "product_parser.h"
 #include "util.h"
+#include "MyDataStore.h"
 
 using namespace std;
 struct ProdNameSorter {
@@ -29,7 +30,7 @@ int main(int argc, char* argv[])
      * Declare your derived DataStore object here replacing
      *  DataStore type to your derived type
      ****************/
-    DataStore ds;
+    MyDataStore ds;
 
 
 
@@ -100,9 +101,36 @@ int main(int argc, char* argv[])
                 done = true;
             }
 	    /* Add support for other commands here */
+            else if (cmd == "ADD") 
+            {
+                string user_name;
+                size_t hit_num;
+                ss >> user_name;
+                ss >> hit_num;
+                ds.add(user_name, hit_num, hits);
+  
+            }
 
+            else if (cmd == "VIEWCART") 
+            {
+                string user_name;
+                ss >> user_name;
+                ds.viewcart(user_name);
+            }
+            
+            else if (cmd == "BUYCART"){
+                /*Buying the cart - You should support the BUYCART username command which should cause the program to iterate through the items in username's cart (case insensitive). 
+                If the item is in stock AND the user has enough money it should be removed from the cart, the in stock quantity reduced by 1, and the product price should be debited from the user’s available credit. 
+                If an item is not in stock or the user does not have enough credit, simply leave it in the cart and go on to the next product. Note: Your cart implementation must iterate through the products in the order they were added. 
+                If the username provided is invalid, print Invalid username to the screen and do not process the command.*/
 
-
+                // use database.txt
+                // check quantity, check if user can afford it,
+                // if condish met, cost down and user walletndown 
+                // delete product from vector
+                // create new vector for every product that hasnt been  bought, then replace user cart with this cart 
+                // ds.buycart();
+            }           
 
             else {
                 cout << "Unknown command" << endl;
