@@ -4,6 +4,7 @@
 #include <algorithm>
 #include "util.h"
 
+
 using namespace std;
 std::string convToLower(std::string src)
 {
@@ -29,6 +30,7 @@ std::set<std::string> parseStringToWords(string rawWords)
         {
          if(ispunct(word[i]) == false)
          {
+            word[i] = tolower(word[i]);
             clean_word += word[i];
          } 
          else if(ispunct(word[i]) == true)

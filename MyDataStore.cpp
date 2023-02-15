@@ -6,21 +6,17 @@ using namespace std;
 
  MyDataStore::~MyDataStore() 
 { 
-
+/**/
     // delete users
-
-    vector<User*> users_plhld;
-    for (map<string, User*>::iterator it = totalUsers_.begin(); it != totalUsers_.end(); it++)
-    {  
-        users_plhld.push_back(it->second);
-        // can delete in iterator
+/*
+    while(user_vect_.size() > 0){
+        delete user_vect_[0];
     }
-
-    for(size_t i = 0; i < users_plhld.size(); i ++)
-    {
-        delete users_plhld[i];
-    }
-
+*/
+   for(size_t i = 0; i < user_vect_.size(); i++)
+   {
+    user_vect_[i];
+   }
    /*
 
     // delete carts
@@ -40,12 +36,16 @@ using namespace std;
     carts_.clear();
 
 */
-
+/*
     // delete all the products
     while(totalProducts_.size() > 0){
         delete totalProducts_[0];
     }
-    
+    */
+   for(size_t j = 0; j < totalProducts_.size(); j++)
+   {
+    totalProducts_[j];
+   }
 }
 
 
@@ -92,23 +92,7 @@ void MyDataStore::addUser(User* u)
 
 vector<Product*> MyDataStore::search(vector<string>& terms, int type)
 {
-// NOTE change search case to al lower 
-//what is terms being passed? 
-// is terms the words that user wants to seerch?
-// why is it a vector
-
-// terms - a vector of words user entered, all converte to lower case
-// parseStringToWords(string) fx takes string of raw words, takes out punctuation and verifies valididty
-// returns SET of valid key words. 
-
-
-// and search
-
-// set 1 of products with word, wet 2 ssame
-// be ready to do multiple terms
-
-//Mens's
-//men
+  // trojan data dog
 
 size_t i = terms.size();
 vector<Product*> product_hits;
@@ -122,8 +106,13 @@ string word1 = terms[set1_pos];
 set1 = keywords_map.find(word1)->second;
 
 set<Product*> compare_set;
+
 while(i > 1)
 { 
+
+  if(i!=terms.size()){
+     set2_pos++; 
+  }
   string word2 = terms[set2_pos];
   set2 = (keywords_map.find(word2))->second;
 
@@ -141,9 +130,7 @@ while(i > 1)
     compare_set = setUnion(set1, set2);
   }
   set1 = compare_set;
-  set2_pos++; 
   i--;
-
 }
 
 for(set<Product*>::iterator it = compare_set.begin(); it != compare_set.end(); ++it)
@@ -204,6 +191,7 @@ void MyDataStore::add(string user_name, size_t hit_result_index, vector<Product*
   {
     user_exists = false;
   }
+  cout << "does user exist?" << boolalpha << user_exists << endl;
 
   // invalid user or hits #
   if(user_exists != true || hit_result_index >  hits_vect.size() || hit_result_index < 0){

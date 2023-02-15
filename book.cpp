@@ -40,7 +40,7 @@ string Book::displayString() const
 
 void Book::dump(std::ostream& os) const
 {
-  os << category_ << "\n" << name_ << "\n" << price_ << "\n" << qty_ << "\n" << IBSN_ << "\n" << Author_  << "\n"<< endl;
+  os << category_ << "\n" << name_ << "\n" << price_ << "\n" << qty_ << "\n" << IBSN_ << "\n" << Author_  << "\n";
 
 }
 
