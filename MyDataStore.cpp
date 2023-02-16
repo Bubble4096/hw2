@@ -98,43 +98,51 @@ size_t i = terms.size();
 vector<Product*> product_hits;
 set<Product*> set1;
 set<Product*> set2;
+set<Product*> compare_set;
 
 int set1_pos = 0;
 int set2_pos = 1;
-
 string word1 = terms[set1_pos];
-set1 = keywords_map.find(word1)->second;
 
-set<Product*> compare_set;
+if(keywords_map.find(word1) == keywords_map.end())
+{
+   string other_word = terms[set2_pos];
+   compare_set = keywords_map.find(other_word)->second;
+} else
+{
+  set1 = keywords_map.find(word1)->second;
+
+
 
 while(i > 1)
-{ 
+  { 
 
-  if(i!=terms.size()){
-     set2_pos++; 
-  }
-  string word2 = terms[set2_pos];
-
-  if(keywords_map.find(word2) == keywords_map.end()){
-    compare_set = set1;
-    i = terms.size();
-    break;
-  } else {
-  set2 = (keywords_map.find(word2))->second;
-  // and search
-    if(type == 0)
-    {
-      
-      compare_set = setIntersection(set1, set2);
-
+    if(i!=terms.size()){
+      set2_pos++; 
     }
-  // or search
-    else if (type == 1)
-    {
-      compare_set = setUnion(set1, set2);
+    string word2 = terms[set2_pos];
+
+    if(keywords_map.find(word2) == keywords_map.end()){
+      compare_set = set1;
+      i = terms.size();
+      break;
+    } else {
+    set2 = (keywords_map.find(word2))->second;
+    // and search
+      if(type == 0)
+      {
+        
+        compare_set = setIntersection(set1, set2);
+
+      }
+    // or search
+      else if (type == 1)
+      {
+        compare_set = setUnion(set1, set2);
+      }
+      set1 = compare_set;
+      i--;
     }
-    set1 = compare_set;
-    i--;
   }
 }
 
