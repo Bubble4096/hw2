@@ -4,7 +4,6 @@
 #include <algorithm>
 #include "util.h"
 
-
 using namespace std;
 std::string convToLower(std::string src)
 {
@@ -15,45 +14,41 @@ std::string convToLower(std::string src)
 /** Complete the code to convert a string containing a rawWord
     to a set of words based on the criteria given in the assignment **/
 std::set<std::string> parseStringToWords(string rawWords)
-{ 
+{
     stringstream ss(rawWords);
     string word;
     set<std::string> word_set;
 
+    while (ss >> word)
+    {
 
-   while(ss >> word){
-    
-
-       string clean_word = "";
-
-       for(size_t i = 0; i < word.size(); i++)
+        string clean_word = "";
+        // iterate through word character by character
+        for (size_t i = 0; i < word.size(); i++)
         {
-         if(ispunct(word[i]) == false)
-         {
-            word[i] = tolower(word[i]);
-            clean_word += word[i];
-         } 
-         else if(ispunct(word[i]) == true)
-         {
-           if(clean_word.size() > 1)
-           {
-            word_set.insert(clean_word);
-           }
-           clean_word = "";
-         }
+            if (ispunct(word[i]) == false) // not punctuation
+            {
+                word[i] = tolower(word[i]); // change to lowercase
+                clean_word += word[i];      // add to clean word
+            }
+            else if (ispunct(word[i]) == true) // punctuation
+            {
+                if (clean_word.size() > 1) // validate wordsize
+                {
+                    word_set.insert(clean_word); // add word to keyword set
+                }
+                clean_word = ""; // reset clean word
+            }
         }
         // if word is completely clean
-        if(clean_word.size() > 1)
+        if (clean_word.size() > 1)
         {
-          word_set.insert(clean_word);
+            word_set.insert(clean_word);
         }
         clean_word = "";
-
-      
     }
-    
-    return word_set; 
 
+    return word_set;
 }
 
 /**************************************************
@@ -62,25 +57,29 @@ std::set<std::string> parseStringToWords(string rawWords)
 
 // Used from http://stackoverflow.com/questions/216823/whats-the-best-way-to-trim-stdstring
 // trim from start
-std::string &ltrim(std::string &s) {
-    s.erase(s.begin(), 
-	    std::find_if(s.begin(), 
-			 s.end(), 
-			 std::not1(std::ptr_fun<int, int>(std::isspace))));
+std::string &ltrim(std::string &s)
+{
+    s.erase(s.begin(),
+            std::find_if(s.begin(),
+                         s.end(),
+                         std::not1(std::ptr_fun<int, int>(std::isspace))));
     return s;
 }
 
 // trim from end
-std::string &rtrim(std::string &s) {
+std::string &rtrim(std::string &s)
+{
     s.erase(
-	    std::find_if(s.rbegin(), 
-			 s.rend(), 
-			 std::not1(std::ptr_fun<int, int>(std::isspace))).base(), 
-	    s.end());
+        std::find_if(s.rbegin(),
+                     s.rend(),
+                     std::not1(std::ptr_fun<int, int>(std::isspace)))
+            .base(),
+        s.end());
     return s;
 }
 
 // trim from both ends
-std::string &trim(std::string &s) {
+std::string &trim(std::string &s)
+{
     return ltrim(rtrim(s));
 }
