@@ -34,6 +34,8 @@ set<string> Movie::keywords() const
 string Movie::displayString() const
 
 {
+    stringstream ss;
+    ss << fixed << setprecision(2) << price_;
     string price = to_string(price_);
     string quantity = to_string(qty_);
     string ret_val = name_ + "\n" + "Genre: " + genre_ + " Rating: " + rating_ + "\n" + price + " " + quantity + " left." ;

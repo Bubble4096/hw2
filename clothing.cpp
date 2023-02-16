@@ -19,7 +19,7 @@ Clothing::Clothing(string category, string name, double price, int qty, string s
 
 set<string> Clothing::keywords() const
 
-{
+{   
     string raw_words = "";
     raw_words += name_;
     raw_words += " ";
@@ -37,6 +37,8 @@ set<string> Clothing::keywords() const
 string Clothing::displayString() const
 
 {
+    stringstream ss;
+    ss << fixed << setprecision(2) << price_;
     string price = to_string(price_);
     string quantity = to_string(qty_);
     string ret_val = name_ + "\n" + "Size: " + size_ + " Brand: " + brand_ + "\n" + price + " " + quantity + " left." ;

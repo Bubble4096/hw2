@@ -15,7 +15,7 @@ using namespace std;
 */
    for(size_t i = 0; i < user_vect_.size(); i++)
    {
-    user_vect_[i];
+    delete user_vect_[i];
    }
    /*
 
@@ -44,7 +44,7 @@ using namespace std;
     */
    for(size_t j = 0; j < totalProducts_.size(); j++)
    {
-    totalProducts_[j];
+    delete totalProducts_[j];
    }
 }
 
@@ -114,23 +114,28 @@ while(i > 1)
      set2_pos++; 
   }
   string word2 = terms[set2_pos];
+
+  if(keywords_map.find(word2) == keywords_map.end()){
+    compare_set = set1;
+    i = terms.size();
+    break;
+  } else {
   set2 = (keywords_map.find(word2))->second;
+  // and search
+    if(type == 0)
+    {
+      
+      compare_set = setIntersection(set1, set2);
 
-
-// and search
-  if(type == 0)
-  {
-    
-    compare_set = setIntersection(set1, set2);
-
+    }
+  // or search
+    else if (type == 1)
+    {
+      compare_set = setUnion(set1, set2);
+    }
+    set1 = compare_set;
+    i--;
   }
-// or search
-  else if (type == 1)
-  {
-    compare_set = setUnion(set1, set2);
-  }
-  set1 = compare_set;
-  i--;
 }
 
 for(set<Product*>::iterator it = compare_set.begin(); it != compare_set.end(); ++it)
