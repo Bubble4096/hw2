@@ -17,13 +17,14 @@ std::set<T> setIntersection(std::set<T>& s1, std::set<T>& s2)
 {
   std::set<T> intersection; 
   for (typename std::set<T>::iterator it = s1.begin(); it != s1.end(); it++)
-      {
+      { if(*it != NULL)
+        {
           intersection.insert(*it);
           if(s2.find(*it) != s2.end())
           {
             intersection.insert(*it);
           }
-
+        }
       }
     return intersection;
 
@@ -36,11 +37,15 @@ std::set<T> setUnion(std::set<T>& s1, std::set<T>& s2)
   for (typename std::set<T>::iterator it = s1.begin(); it != s1.end(); it++)
       {
           if(s2.find(*it) == s2.end())
-          {
-            union667.insert(*s2.find(*it));
+          { if(*s2.find(*it) != NULL){
+             union667.insert(*s2.find(*it));
           }
-
-        union667.insert(*it);
+            
+          }
+        if(*s1.find(*it) !=  NULL)
+        {
+        union667.insert(*s1.find(*it));
+        }
 
       }
 
