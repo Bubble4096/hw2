@@ -131,7 +131,9 @@ int main(int argc, char* argv[])
                 // if condish met, cost down and user walletndown 
                 // delete product from vector
                 // create new vector for every product that hasnt been  bought, then replace user cart with this cart 
-                // ds.buycart();
+                string user_name;
+                ss >> user_name;               
+                ds.buycart(user_name);
             }           
 
             else {

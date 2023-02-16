@@ -231,10 +231,47 @@ void MyDataStore::add(string user_name, size_t hit_result_index, vector<Product*
   }
 }
 
-// void MyDataStore::buycart(string user_name)
-// {
-//   // vector<Product*> user_cart = 
-//   // cout << "trying to buy cart" << endl;
+void MyDataStore::buycart(string user_name)
+{
+    vector<Product*> leftover_cart;
 
+    //validate user 
+  if(carts_.find(user_name) == carts_.end())
+  {
+    cout << "Invalid User" << endl; // double check error message 
 
-// }
+  } else
+  { 
+    vector<Product*> user_cart = (carts_.find(user_name))->second;
+    Product* curr_product;
+    User* curr_user = (totalUsers_.find(user_name)->second);
+
+    for(size_t i = 0; i <  user_cart.size(); i ++)
+    {
+      curr_product = user_cart[i];
+
+      //check quantity and can user afford
+      int qty = curr_product->getQty();
+      double money = curr_user->getBalance();
+      double price = curr_product->getPrice();
+      double diff = money - price;
+
+      if(qty > 0 && diff > 0)
+      {
+        // - update product qty
+        // - update user money
+        curr_product->subtractQty(1);
+        curr_user->deductAmount(price);
+    
+      } else  
+      {
+        leftover_cart.push_back(curr_product);
+      }
+
+    }
+      // set user cart to leftovers cart
+      carts_.find(user_name)->second = leftover_cart;
+
+  }
+
+}

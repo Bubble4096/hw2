@@ -15,7 +15,7 @@ public:
     void dump(std::ostream& ofile);
     void viewcart(std::string user_name);
     void add(std::string user_name, size_t hit_result_index, std::vector<Product*> hits_vect);
-   // void buycart();
+    void buycart(std::string user_name);
 private: 
     std::map<std::string, std::set<Product*>> keywords_map;
     std::map<std::string, User*> totalUsers_;
