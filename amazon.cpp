@@ -89,7 +89,7 @@ int main(int argc, char* argv[])
                     terms.push_back(term);
                 }
                 hits = ds.search(terms, 1);
-                cout << "finished search, check hits" << endl;
+               // cout << "finished search, check hits" << endl;
                 
                 displayProducts(hits);
             }

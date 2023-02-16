@@ -47,6 +47,6 @@ void Movie::dump(std::ostream& os) const
 {
   Product::dump(os);
   //os << category_ << "\n" << name_ << "\n" << price_ << "\n" << qty_ << "\n" << genre_ << "\n" << rating_  << "\n";
-  os << "\n" << genre_ << "\n" << rating_  << "\n";
+  os << genre_ << "\n" << rating_  << "\n";
 
 }
